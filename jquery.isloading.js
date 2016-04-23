@@ -159,7 +159,9 @@
 
             if( "overlay" === this.options.position ) {
 
-                $( this.element ).find( ".isloading-overlay" ).first().remove();
+                $(this.element).find(".isloading-overlay").first().fadeOut("fast", function () {
+                    $(this).remove();
+                });
 
             } else {
 
