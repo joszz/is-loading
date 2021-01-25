@@ -114,9 +114,17 @@
 
                 case "overlay":
                     var $wrapperTpl = null;
-
+					$wrapperTpl = $('<div class="isloading-overlay" />');
+					
                     if( $( self.element ).is( "body") ) {
-                        $wrapperTpl = $('<div class="isloading-overlay" style="position:fixed; left:0; top:0; z-index: 10000; background: rgba(0,0,0,' + self.options.transparency + '); width: 100%; height: ' + $(window).height() + 'px;" />');
+						$wrapperTpl.css({
+							position: 'fixed',
+							top: 0,
+							left: 0,
+							background: 'rgba(0,0,0,' + self.options.transparency + ')',
+							width: '100%',
+							height:  $(window).height() + 'px'
+						});
                         $( "body" ).prepend( $wrapperTpl );
 
                         $( window ).on('resize', function() {
@@ -134,7 +142,14 @@
                         } else {
                             pos = $( self.element ).position();
                         }
-                        $wrapperTpl = $('<div class="isloading-overlay" style="position:absolute; top: ' + pos.top + 'px; left: ' + pos.left + 'px; z-index: 10000; background: rgba(0,0,0,' + self.options.transparency + '); width: ' + width + '; height: ' + height + ';" />');
+						$wrapperTpl.css({
+							position: 'absolute',
+							top: pos.top + 'px',
+							left: pos.left + 'px',
+							background: 'rgba(0,0,0,' + self.options.transparency + ')',
+							width: width,
+							height: height
+						});
                         $( self.element ).prepend( $wrapperTpl );
 
                         $( window ).on('resize', function() {
