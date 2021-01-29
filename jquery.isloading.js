@@ -218,13 +218,20 @@
     // Constructor
     $.fn[pluginName] = function ( options ) {
         return this.each(function () {
-            if ( options && "hide" !== options || !$.data( this, "plugin_" + pluginName ) ) {
+            if ( !options || "hide" !== options ) {
                 $.data( this, "plugin_" + pluginName, new Plugin( this, options ) );
             } else {
                 var elt = $.data( this, "plugin_" + pluginName );
 
-                if( "hide" === options )    { elt.hide(); }
-                else                        { elt.show(); }
+				if(elt){
+					if( "hide" === options )    { elt.hide(); }
+					else                        { elt.show(); }
+				}
+				else {
+					$(this).find(".isloading-overlay").fadeOut("fast", function () {
+						$(this).remove();
+					});
+				}
             }
         });
     };
